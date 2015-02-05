@@ -5,14 +5,20 @@
 # configures the configuration version (we support older styles for
 # backwards compatibility). Please don't change it unless you know what
 # you're doing.
-Vagrant.configure(2) do |config|
+VAGRANTFILE_API_VERSION = "2"
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # The most common configuration options are documented and commented below.
   # For a complete reference, please see the online documentation at
   # https://docs.vagrantup.com.
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
-  config.vm.box = "base"
+  config.vm.box = "virt-wp"
+  config.vm.hostname = "virt-wp.com"
+
+  config.vm.box_url = "http://www.lyricalsoftware.com/downloads/centos65.box"
+  # config.omnibus.chef_version = :latest
+  config.omnibus.chef_version = "11.8.0"
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -43,13 +49,17 @@ Vagrant.configure(2) do |config|
   # backing providers for Vagrant. These expose provider-specific options.
   # Example for VirtualBox:
   #
-  # config.vm.provider "virtualbox" do |vb|
-  #   # Display the VirtualBox GUI when booting the machine
-  #   vb.gui = true
-  #
-  #   # Customize the amount of memory on the VM:
-  #   vb.memory = "1024"
-  # end
+  config.vm.provider :virtualbox do |vb|
+    # Display the VirtualBox GUI when booting the machine
+    vb.gui = false
+    vb.name='virt-wp'
+
+    # Customize the amount of memory on the VM:
+    # vb.memory = "2048"
+    # vb.cpus = 2
+    vb.customize ["modifyvm", :id, "--memory", "2048"]
+    vb.customize ["modifyvm", :id, "--cpus", "2"]
+  end
   #
   # View the documentation for the provider you are using for more
   # information on available options.
@@ -67,4 +77,14 @@ Vagrant.configure(2) do |config|
   # config.vm.provision "shell", inline <<-SHELL
   #   sudo apt-get install apache2
   # SHELL
+
+  # config.vm.provision :chef_solo do |chef|
+  #   chef.cookbooks_path = ["site-cookbooks","cookbooks"]
+  #   #chef.roles_path = "./roles"
+  #   #chef.data_bags_path = ".data_bags"
+  #   #chef.add_role("ra9dev")
+  #   chef.run_list=[
+  #
+  #   ]
+  # end
 end

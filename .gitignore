@@ -1,4 +1,7 @@
 /cookbooks/
 
+.vagrant
+
 .idea
 *.iml
+*.lock
