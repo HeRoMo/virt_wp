@@ -96,7 +96,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     }
     #chef.add_role("ra9dev")
     chef.run_list=[
-      'recipe[virt_wp::default]'
+      'recipe[virt_wp::default]',
+      'recipe[virt_wp::lamp]',
+      'recipe[virt_wp::wordpress]'
     ]
   end
 end
