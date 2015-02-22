@@ -21,13 +21,13 @@
 
 // ** MySQL 設定 - この情報はホスティング先から入手してください。 ** //
 /** WordPress のためのデータベース名 */
-define('DB_NAME', 'wordpress');
+define('DB_NAME', '<%=node[:wordpress][:db_name]%>');
 
 /** MySQL データベースのユーザー名 */
-define('DB_USER', 'wp_user');
+define('DB_USER', '<%=node[:wordpress][:db_user]%>');
 
 /** MySQL データベースのパスワード */
-define('DB_PASSWORD', 'wp_pswd');
+define('DB_PASSWORD', '<%=node[:wordpress][:db_password]%>');
 
 /** MySQL のホスト名 */
 define('DB_HOST', '127.0.0.1');
