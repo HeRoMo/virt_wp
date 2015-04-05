@@ -2,7 +2,7 @@
 # Cookbook Name:: virt_wp
 # Recipe:: wordpress
 #
-# Copyright (C) 2015 YOUR_NAME
+# Copyright (C) 2015 HeRo
 #
 # All rights reserved - Do Not Redistribute
 #

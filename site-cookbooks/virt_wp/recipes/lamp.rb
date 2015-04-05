@@ -2,11 +2,10 @@
 # Cookbook Name:: virt_wp
 # Recipe:: lamp
 #
-# Copyright (C) 2015 YOUR_NAME
+# Copyright (C) 2015 HeRo
 #
 # All rights reserved - Do Not Redistribute
 #
-
 
 e = execute "yum makecache" do
   action :nothing
