@@ -1,0 +1,3 @@
+CREATE DATABASE IF NOT EXISTS <%=node[:wordpress][:db_name]%>;
+GRANT ALL PRIVILEGES ON <%=node[:wordpress][:db_name]%>.* TO "<%=node[:wordpress][:db_user]%>"@"%" IDENTIFIED BY "<%=node[:wordpress][:db_password]%>";
+FLUSH PRIVILEGES;

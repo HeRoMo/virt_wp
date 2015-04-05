@@ -16,9 +16,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "virt-wp"
   config.vm.hostname = "virt-wp.com"
 
-  config.vm.box_url = "http://www.lyricalsoftware.com/downloads/centos65.box"
-  # config.omnibus.chef_version = :latest
-  config.omnibus.chef_version = "11.8.0"
+  # config.vm.box_url = "http://www.lyricalsoftware.com/downloads/centos65.box"
+  config.vm.box = "chef/centos-6.6"
+  if Vagrant.has_plugin?("vagrant-omnibus")
+    config.omnibus.chef_version = 'latest'
+    #config.omnibus.chef_version = "11.8.0"
+  end
+
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -38,6 +42,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Bridged networks make the machine appear as another physical device on
   # your network.
   # config.vm.network "public_network"
+  config.vm.network :private_network, ip: "192.168.33.111"
 
   # Share an additional folder to the guest VM. The first argument is
   # the path on the host to the actual folder. The second argument is
@@ -78,13 +83,22 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #   sudo apt-get install apache2
   # SHELL
 
-  # config.vm.provision :chef_solo do |chef|
-  #   chef.cookbooks_path = ["site-cookbooks","cookbooks"]
-  #   #chef.roles_path = "./roles"
-  #   #chef.data_bags_path = ".data_bags"
-  #   #chef.add_role("ra9dev")
-  #   chef.run_list=[
-  #
-  #   ]
-  # end
+  config.vm.provision :chef_solo do |chef|
+    chef.cookbooks_path = ["site-cookbooks","cookbooks"]
+    #chef.roles_path = "./roles"
+    #chef.data_bags_path = ".data_bags"
+    chef.json = {
+        mysql: {
+            server_root_password: 'rootpass',
+            server_debian_password: 'debpass',
+            server_repl_password: 'replpass'
+        }
+    }
+    #chef.add_role("ra9dev")
+    chef.run_list=[
+      'recipe[virt_wp::default]',
+      'recipe[virt_wp::lamp]',
+      'recipe[virt_wp::wordpress]'
+    ]
+  end
 end
