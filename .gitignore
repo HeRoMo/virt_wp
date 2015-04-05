@@ -1,4 +1,5 @@
-/cookbooks/
+/cookbooks/*
+!/cookbooks/.gitkeep
 
 .vagrant
 
