@@ -2,4 +2,4 @@ source "https://supermarket.chef.io"
 
 #metadata
 
-cookbook "mysql"
+cookbook "mysql", '~> 6.1.2'

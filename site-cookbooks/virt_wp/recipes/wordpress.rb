@@ -10,7 +10,7 @@
 ### wordpress のインストール
 Chef::Log.info "### Wordpress Install ###"
 
-wp = "wordpress-4.1.1-ja"
+wp = "wordpress-4.3.1-ja"
 wp_archive = "#{wp}.zip"
 wp_dl_url ="https://ja.wordpress.org/#{wp_archive}"
 work_dir = "/usr/local/src"
