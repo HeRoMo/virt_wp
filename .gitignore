@@ -6,3 +6,5 @@
 .idea
 *.iml
 *.lock
+/var_www_html/*
+!/var_www_html/.gitkeep

@@ -24,6 +24,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
 
+
+
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
   # `vagrant box outdated`. This is not recommended.
@@ -49,6 +51,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
   # config.vm.synced_folder "../data", "/vagrant_data"
+
+  if Dir.exist?("./var_www_html")
+    config.vm.synced_folder "./var_www_html", "/var/www/html"
+  end
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
@@ -94,7 +100,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
             server_repl_password: 'replpass'
         }
     }
-    #chef.add_role("ra9dev")
     chef.run_list=[
       'recipe[virt_wp::default]',
       'recipe[virt_wp::lamp]',
